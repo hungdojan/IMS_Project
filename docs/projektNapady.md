@@ -53,3 +53,18 @@
 -  **Nalezene studie**
     - Cellular automata simulations of fungal growth on solid substrates
         https://www.sciencedirect.com/science/article/pii/073497509390031H
+        - Grown on a solid substrate (cereal grains)
+        - Growth rate is largely determined by the availability of nutrients on a growth medium
+        - CA view: "If I am unoccupied, have nutrients, and have
+            fungal hyphae near me, I will (perhaps) become colonized."
+        - Each cell will have, in its inial state a certain amount of nutrients available
+        - 320 x 200 lattice
+        - Each simulation is started from a single spore placed in the centre
+        - If colony covers the entire screen, colony mass density is calculated: `colony_density = number_of_occupied_cells / number_of_all_cells`
+        - Models presented by the study:
+          - **Model 1a**
+            - If a site is in the neughbourhood of the current cell is occupied, then the probability of the currect cell being occupied is defined as follows: `1 neighbor, 12.5%; 2 neighbors, 25%; 3 neighbors, 50%: 4-8 neighbors, 0%`
+          - **Variations implemented by other models**
+            - An unoccupied site is aged as its neighbours accumulate. This is a representation of nutrient depletion 
+            - Experimentation with growth directions - not clockwise or anti-clockwise! Instead for example: N, SW, E, NW, S, NE, W, SE. Site can only be occupied if an occupied neighbour is present in that direction.
+            - Adding multiple states to occupied cells. These transitions are dependent on the number of neighbours a cell has.
