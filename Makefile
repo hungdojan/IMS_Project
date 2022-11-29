@@ -1,6 +1,7 @@
 # C project: ims_project
 CC=gcc
 CFLAGS=-std=c99 -Wall -Wextra -pedantic -Iinclude
+LDLIBS=-lncurses
 # CFLAGS+=-O2 # Release
 CFLAGS+=-g  # Debug
 TARGET=ims_project
@@ -19,7 +20,7 @@ doc: Doxyfile
 	doxygen
 
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
 
 clean:
 	rm -f $(OBJS) $(TARGET)
