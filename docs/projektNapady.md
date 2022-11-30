@@ -51,7 +51,7 @@
     - **Tranzitivni funkce:**
     - **Stochasticka data destove vody:**
 -  **Nalezene studie**
-    - Cellular automata simulations of fungal growth on solid substrates
+    - _Cellular automata simulations of fungal growth on solid substrates_
         https://www.sciencedirect.com/science/article/pii/073497509390031H
         - Grown on a solid substrate (cereal grains)
         - Growth rate is largely determined by the availability of nutrients on a growth medium
@@ -68,3 +68,9 @@
             - An unoccupied site is aged as its neighbours accumulate. This is a representation of nutrient depletion 
             - Experimentation with growth directions - not clockwise or anti-clockwise! Instead for example: N, SW, E, NW, S, NE, W, SE. Site can only be occupied if an occupied neighbour is present in that direction.
             - Adding multiple states to occupied cells. These transitions are dependent on the number of neighbours a cell has.
+    - _Nutritional influence on fungal colony growth and biomass distribution in response to toxic metals_
+    https://academic.oup.com/femsle/article/204/2/311/471993
+        - as the amount of available carbon source (glucose) increased, the apparent toxicity of the metals decreased, suggesting that, the more nutrients a cell has available, the more likely it is to divide in that spot again
+    - _Generic model of morphological changes in growing colonies of fungi_ https://academic.oup.com/femsle/article/204/2/311/471993
+      - Growth is happening from a line in a single direction, not from a point.
+      - In nutrientrich conditions, the colonies showed a homogeneous andsmooth growth front. In contrast, growth in glucose-poor conditions resulted in colonies with rougher surfaces.
