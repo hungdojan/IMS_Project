@@ -1,63 +1,45 @@
+/**
+ * @brief Definition of functions that handles double buffering structure.
+ *
+ * This source code serves as submission for
+ * a project of class IMS at FIT, BUT 2022/23.
+ *
+ * @file board.c
+ * @authors Hung Do (xdohun00)
+ *          Marek Dohnal (xdohna48)
+ * @date 05/12/2022
+ */
 #include "board.h"
-#include <stdlib.h>
-#include <string.h>
+#include "board_setup.h"
+#include <stdlib.h>     // calloc, free
+#include <string.h>     // memmove
 
-const char START_POS[] =
-//          01234567890123456789012345678901234567890123456789
-/* 0 */    "                                                  "
-/* 1 */    "                                                  "
-/* 2 */    "                                                  "
-/* 3 */    "      x                                           "
-/* 4 */    "       xx                                         "
-/* 5 */    "      xx                                          "
-/* 6 */    "                                                  "
-/* 7 */    "                                                  "
-/* 8 */    "                                                  "
-/* 9 */    "                                                  "
-/* 0 */    "                                                  "
-/* 1 */    "                                                  "
-/* 2 */    "                                                  "
-/* 3 */    "                                                  "
-/* 4 */    "                                                  "
-/* 5 */    "                    xxx                           "
-/* 6 */    "                                                  "
-/* 7 */    "                   x                              "
-/* 8 */    "                  x                               "
-/* 9 */    "                                                  "
-/* 0 */    "                                                  "
-/* 1 */    "                                                  "
-/* 2 */    "                                                  "
-/* 3 */    "                                                  "
-/* 4 */    "                                                  ";
+int pos_x = 0, pos_y = 0, iteration = 0;
 
-
-// here write your code
-int init_board(struct board_t *b, int w, int h) {
+int init_board(struct board_t *b) {
     if (b == NULL)
         return -1;
-    b->back = calloc(w*h+1, 1);
+    b->back = calloc(BOARD_WIDTH * BOARD_HEIGHT, 1);
     if (b->back == NULL)    goto err_back;
 
-    b->front = calloc(w*h, 1);
+    b->front = calloc(BOARD_WIDTH * BOARD_HEIGHT, 1);
     if (b->front == NULL)   goto err_front;
 
-    b->w = w;
-    b->h = h;
-
     // init starting grid with dots
-    memmove(b->front, START_POS, w*h+1);
+    memmove(b->front, INIT_POS, BOARD_WIDTH * BOARD_HEIGHT);
     return 0;
 
 err_front:
     free(b->back);
 err_back:
+    fprintf(stderr, "Not enough memory to initialize double buffering structure.\n");
     return 1;
 }
 
 static int nof_neighbors_row(struct board_t *b, int y, int x) {
     int count = 0;
-    for (int i = MAX(0, x-1); i <= MIN(x+1, b->w - 1); i++) {
-        if (b->front[y * b->w + i] == CELL_ALIVE)
+    for (int i = MAX(0, x-1); i <= MIN(x+1, BOARD_WIDTH - 1); i++) {
+        if (b->front[y * BOARD_WIDTH + i] == CELL_ALIVE)
             count++;
     }
     return count;
@@ -72,11 +54,11 @@ static int nof_neighbors(struct board_t *b, int y, int x) {
 
     // middle row
     count += nof_neighbors_row(b, y, x);
-    if (b->front[y * b->w + x] == CELL_ALIVE)
+    if (b->front[y * BOARD_WIDTH + x] == CELL_ALIVE)
         count--;
 
     // lower row
-    if (y < b->h - 1) {
+    if (y < BOARD_HEIGHT - 1) {
         count += nof_neighbors_row(b, y+1, x);
     }
     return count;
@@ -84,38 +66,42 @@ static int nof_neighbors(struct board_t *b, int y, int x) {
 
 int update_board(struct board_t *b) {
     // height
-    for (int i = 0; i < b->h; i++) {
+    for (int i = 0; i < BOARD_HEIGHT; i++) {
         // column
-        for (int j = 0; j < b->w; j++) {
+        for (int j = 0; j < BOARD_WIDTH; j++) {
             int neighbors = nof_neighbors(b, i, j);
-            // printw("y: %d, x: %d, n: %d\n", i, j, neighbors);
 
-            if (b->front[i * b->w + j] == CELL_ALIVE) {
+            if (b->front[i * BOARD_WIDTH + j] == CELL_ALIVE) {
                 // alive
                 if (neighbors == 2 || neighbors == 3)
-                    b->back[i * b->w + j] = CELL_ALIVE;
+                    b->back[i * BOARD_WIDTH + j] = CELL_ALIVE;
                 else
-                    b->back[i * b->w + j] = CELL_DEAD;
+                    b->back[i * BOARD_WIDTH + j] = CELL_DEAD;
             } else {
                 // dead
                 if (neighbors == 3)
-                    b->back[i * b->w + j] = CELL_ALIVE;
+                    b->back[i * BOARD_WIDTH + j] = CELL_ALIVE;
                 else
-                    b->back[i * b->w + j] = CELL_DEAD;
+                    b->back[i * BOARD_WIDTH + j] = CELL_DEAD;
             }
         }
     }
 
+    // buffer swap
     void *tmp = b->back;
     b->back = b->front;
     b->front = tmp;
     return 0;
 }
 
-int display_board(struct board_t *b, WINDOW *win) {
-    mvwprintw(win, 0, 0, "%s", b->front);
-    // box(win, 0, 0);
-    wrefresh(win);
+int display_board(struct board_t *b) {
+    // print chars one by one
+    for (int i = 0; i < LINES && i-pos_y < BOARD_HEIGHT; i++) {
+        for (int j = 0; j < COLS && j-pos_x < BOARD_WIDTH; j++) {
+            mvprintw(i, j, "%c", b->front[(i-pos_y) * BOARD_WIDTH + (j-pos_x)]);
+        }
+    }
+    refresh();
     return 0;
 }
 

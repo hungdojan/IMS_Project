@@ -1,7 +1,7 @@
 # C project: ims_project
 CC=gcc
 CFLAGS=-std=c99 -Wall -Wextra -pedantic -Iinclude
-LDLIBS=-lncurses
+LDLIBS=-lncursesw
 # CFLAGS+=-O2 # Release
 CFLAGS+=-g  # Debug
 TARGET=ims_project
@@ -9,7 +9,7 @@ OBJS=$(patsubst %.c,%.o,$(wildcard ./src/*.c))
 
 #####################################
 
-.PHONY: all run doc pack valgrind debug
+.PHONY: all run doc pack valgrind debug update_board
 
 all: $(TARGET)
 
@@ -21,6 +21,10 @@ doc: Doxyfile
 
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
+
+update_board:
+	cp ./src/board_setup.c ./pixel_editor/backup.c
+	cp ./pixel_editor/board_setup.c ./src/board_setup.c
 
 clean:
 	rm -f $(OBJS) $(TARGET)
