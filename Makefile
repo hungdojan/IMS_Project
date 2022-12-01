@@ -9,7 +9,7 @@ OBJS=$(patsubst %.c,%.o,$(wildcard ./src/*.c))
 
 #####################################
 
-.PHONY: all run doc pack valgrind debug update_board
+.PHONY: all run doc pack valgrind debug pixel_edit
 
 all: $(TARGET)
 
@@ -22,9 +22,8 @@ doc: Doxyfile
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
 
-update_board:
-	cp ./src/board_setup.c ./pixel_editor/backup.c
-	cp ./pixel_editor/board_setup.c ./src/board_setup.c
+pixel_edit:
+	cd src && python pixel_editor.py
 
 clean:
 	rm -f $(OBJS) $(TARGET)
