@@ -54,12 +54,18 @@ https://www.sciencedirect.com/science/article/abs/pii/073497509390031H?fr=RR-2&r
     - 3-8 neighbours 12.5%
 
 #### my trial at something new
-- high nutrients -> more compact growth
-- low nutrients -> less compact growth
-- nutrients are 
-- -if a cell is unoccupied, look for neighbours:
-- - if a neighbour does not have nutrientes available, do not divide
-- - n...number of bneighbours (1-8)
-  - c...concentration of nutrients (1-90)
-  - p = n*(c)/8
-- if a cell is occupied deplete nutrients
+- **Modifications to Model 2:**
+  - User will be able to pick a number of states an empty cell will have to cycle through in order to become uninhabitable.
+  - Stages in an array. Exponential increase in probability of a cell becoming uninhabitable
+  - From that a probability of cells dividing is inferred. 
+  - Add a counter of cells that are alive, and a counter of generations.
+- **Completely new model**
+  - high nutrients -> more compact growth
+  - low nutrients -> less compact growth
+  - nutrients are 
+    - if a cell is unoccupied, look for neighbours:
+    - if a neighbour does not have nutrientes available, do not divide
+    - n...number of neighbours (1-8)
+    - c...concentration of nutrients (1-90)
+    - p = n*(c)/8
+  - if a cell is occupied deplete nutrients
