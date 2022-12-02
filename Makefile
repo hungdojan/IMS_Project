@@ -4,29 +4,35 @@ CFLAGS=-std=c99 -Wall -Wextra -pedantic -Iinclude
 LDLIBS=-lncursesw
 # CFLAGS+=-O2 # Release
 CFLAGS+=-g  # Debug
-TARGET=ims_project
+TARGETS=ims_project1 ims_project2 ims_project3 ims_project4
 OBJS=$(patsubst %.c,%.o,$(wildcard ./src/*.c))
 
 #####################################
 
 .PHONY: all run doc pack valgrind debug pixel_edit
 
-all: $(TARGET)
-
-run: $(TARGET)
-	./$<
+all: $(TARGETS)
 
 doc: Doxyfile
 	doxygen
 
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDLIBS)
+ims_project1: $(OBJS)
+	$(CC) $(CFLAGS) -o $@ ./src/main.o ./src/board.o ./src/board_setup.o ./src/board_rule1.o $(LDLIBS);
+ims_project2: $(OBJS)
+	$(CC) $(CFLAGS) -o $@ ./src/main.o ./src/board.o ./src/board_setup.o ./src/board_rule2.o $(LDLIBS);
+ims_project3: $(OBJS)
+	$(CC) $(CFLAGS) -o $@ ./src/main.o ./src/board.o ./src/board_setup.o ./src/board_rule3.o $(LDLIBS);
+ims_project4: $(OBJS)
+	$(CC) $(CFLAGS) -o $@ ./src/main.o ./src/board.o ./src/board_setup.o ./src/board_rule4.o $(LDLIBS);
+
+src/%.o: src/%.c
+
 
 pixel_edit:
 	cd src && python pixel_editor.py
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(TARGETS) ./src/*.o
 
 valgrind: $(TARGET)
 	valgrind --leak-check=full --track-origins=yes ./$<

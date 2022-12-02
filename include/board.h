@@ -45,6 +45,14 @@ struct board_t {
 int init_board(struct board_t *b);
 
 /**
+ * @brief Apply the rules to data.
+ *
+ * Output data will be stored into board_t::back buffer.
+ * @param b Address of board structure.
+ */
+void apply_rules(struct board_t *b);
+
+/**
  * @brief Calculate next iteration of the board.
  *
  * Rules are defined in this function. After finishing calculation function

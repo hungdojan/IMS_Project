@@ -118,9 +118,17 @@ if __name__ == "__main__":
     while running:
         
         for event in pygame.event.get():
-            if event.type == pygame.QUIT or \
-                (event.type == pygame.KEYDOWN and event.key == pygame.K_q):
+            if event.type == pygame.QUIT:
                 running = False
+
+            # keyboard event
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    running = False
+                if event.key == pygame.K_c:
+                    board = [[0 for _ in range(WIDTH)] for _ in range(HEIGHT)]
+
+            # mouse event
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_press = pygame.mouse.get_pressed()
                 # get mouse coordinates

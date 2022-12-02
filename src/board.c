@@ -11,8 +11,9 @@
  */
 #include "board.h"
 #include "board_setup.h"
-#include <stdlib.h>     // calloc, free
+#include <stdlib.h>     // calloc, free, srand, rand
 #include <string.h>     // memmove
+#include <time.h>       // time
 
 int pos_x = 0, pos_y = 0, iteration = 0;
 
@@ -36,56 +37,8 @@ err_back:
     return 1;
 }
 
-static int nof_neighbors_row(struct board_t *b, int y, int x) {
-    int count = 0;
-    for (int i = MAX(0, x-1); i <= MIN(x+1, BOARD_WIDTH - 1); i++) {
-        if (b->front[y * BOARD_WIDTH + i] == CELL_ALIVE)
-            count++;
-    }
-    return count;
-}
-
-static int nof_neighbors(struct board_t *b, int y, int x) {
-    int count = 0;
-    // upper row
-    if (y > 0) {
-        count += nof_neighbors_row(b, y-1, x);
-    }
-
-    // middle row
-    count += nof_neighbors_row(b, y, x);
-    if (b->front[y * BOARD_WIDTH + x] == CELL_ALIVE)
-        count--;
-
-    // lower row
-    if (y < BOARD_HEIGHT - 1) {
-        count += nof_neighbors_row(b, y+1, x);
-    }
-    return count;
-}
-
 int update_board(struct board_t *b) {
-    // height
-    for (int i = 0; i < BOARD_HEIGHT; i++) {
-        // column
-        for (int j = 0; j < BOARD_WIDTH; j++) {
-            int neighbors = nof_neighbors(b, i, j);
-
-            if (b->front[i * BOARD_WIDTH + j] == CELL_ALIVE) {
-                // alive
-                if (neighbors == 2 || neighbors == 3)
-                    b->back[i * BOARD_WIDTH + j] = CELL_ALIVE;
-                else
-                    b->back[i * BOARD_WIDTH + j] = CELL_DEAD;
-            } else {
-                // dead
-                if (neighbors == 3)
-                    b->back[i * BOARD_WIDTH + j] = CELL_ALIVE;
-                else
-                    b->back[i * BOARD_WIDTH + j] = CELL_DEAD;
-            }
-        }
-    }
+    apply_rules(b);
 
     // buffer swap
     void *tmp = b->back;

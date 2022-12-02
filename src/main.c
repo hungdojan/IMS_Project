@@ -12,6 +12,8 @@
 #include <locale.h>     // setlocale
 #include <ncurses.h>
 #include <stdio.h>      // printf
+#include <stdlib.h>     // srand
+#include <time.h>       // time_t, time
 #include "board.h"
 
 /**
@@ -31,6 +33,8 @@ int main() {
     int ch = 0;             // received user input
     int timer = 0;          // current timer's value
     int timer_limit = 50;   // after timer hits this value, make an iteration
+    time_t t1;
+    srand((unsigned)time(&t1));
 
     struct board_t b = { NULL, NULL };
     if (init_board(&b))

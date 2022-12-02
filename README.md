@@ -54,14 +54,14 @@ make pixel_edit
 |-----------+-----------------------------|
 |  klavesa  |         vyznam              |
 |-----------+-----------------------------|
-|    +      | zvyseni rychlosti iterace   |
-|    -      | snizeni rychlosti iterace   |
-|    q      | ukonceni programu           |
-| KEY_UP    | posun obrazovky nahoru      |
+|     +     | zvyseni rychlosti iterace   |
+|     -     | snizeni rychlosti iterace   |
+|     q     | ukonceni programu           |
+|  KEY_UP   | posun obrazovky nahoru      |
 | KEY_DOWN  | posun obrazovky dolu        |
 | KEY_RIGHT | posun obrazovky doprava     |
 | KEY_LEFT  | posun obrazovky doleva      |
-| SPACE     | zastaveni/spusteni iterace  |
+|   SPACE   | zastaveni/spusteni iterace  |
 |-----------+-----------------------------|
 ```
 
