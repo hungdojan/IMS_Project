@@ -29,6 +29,9 @@ static void setup_colors() {
     // syntax:  COLOR_LABEL,    COLOR_FONT,  COLOR_BACKGROUND
     init_pair(CELL_DEAD+1,      COLOR_WHITE, CC_ALMOST_BLACK);
     init_pair(CELL_ALIVE+1,     COLOR_BLACK, COLOR_CYAN);
+    init_pair(CELL_AGE1+1,      COLOR_WHITE, CC_ALMOST_BLACK);
+    init_pair(CELL_AGE2+1,      COLOR_WHITE, CC_ALMOST_BLACK);
+    init_pair(CELL_AGE3+1,      COLOR_WHITE, CC_ALMOST_BLACK);
     init_pair(CELL_UNHABITED+1, COLOR_BLACK, CC_LIGHT_GRAY);
 }
 

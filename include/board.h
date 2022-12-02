@@ -41,6 +41,9 @@ enum custom_color_t {
 enum state_t {
     CELL_DEAD=0,
     CELL_ALIVE,
+    CELL_AGE1,
+    CELL_AGE2,
+    CELL_AGE3,
     CELL_UNHABITED,
     STATE_LEN
 };
