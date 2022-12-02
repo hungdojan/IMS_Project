@@ -19,9 +19,29 @@
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 
+#define DEFINE_COLOR(name_val, r, g, b) \
+    do {\
+        init_color(name_val, \
+                   (int)(r / 255.0 * 1000), \
+                   (int)(g / 255.0 * 1000), \
+                   (int)(b / 255.0 * 1000));\
+    } while (0)
+
+/**
+ * @brief List of custom colors.
+ */
+enum custom_color_t {
+    CC_LIGHT_GRAY=30,
+    CC_ALMOST_BLACK
+};
+
+/**
+ * @brief List of cell states.
+ */
 enum state_t {
     CELL_DEAD=0,
     CELL_ALIVE,
+    CELL_UNHABITED,
     STATE_LEN
 };
 

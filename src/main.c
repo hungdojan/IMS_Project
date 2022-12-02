@@ -17,6 +17,22 @@
 #include "board.h"
 
 /**
+ * @brief Set up usable colors.
+ */
+static void setup_colors() {
+    // defining new colors
+    // list of custom colors are listed in enum custom_color_t
+    DEFINE_COLOR(CC_LIGHT_GRAY, 225, 225, 225);
+    DEFINE_COLOR(CC_ALMOST_BLACK, 10, 10, 10);
+
+    // setup color pairs
+    // syntax:  COLOR_LABEL,    COLOR_FONT,  COLOR_BACKGROUND
+    init_pair(CELL_DEAD+1,      COLOR_WHITE, CC_ALMOST_BLACK);
+    init_pair(CELL_ALIVE+1,     COLOR_BLACK, COLOR_CYAN);
+    init_pair(CELL_UNHABITED+1, COLOR_BLACK, CC_LIGHT_GRAY);
+}
+
+/**
  * @brief Initial ncurses setup.
  */
 static void init_setup() {
@@ -26,6 +42,9 @@ static void init_setup() {
     keypad(stdscr, TRUE);       // support F1-F12 keys
     timeout(5);                 // non-blocking reading
     curs_set(0);                // hide cursor
+    start_color();
+
+    setup_colors();
 }
 
 int main() {

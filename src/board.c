@@ -47,11 +47,18 @@ int update_board(struct board_t *b) {
     return 0;
 }
 
-int display_board(struct board_t *b) {
+static void print_character(int i, int j, enum state_t state) {
     static char printable_chars[] = {
         ' ',    // CELL_DEAD
-        'o'     // CELL_ALIVE
+        'o',    // CELL_ALIVE
+        ' ',    // CELL_UNHABITED
     };
+    attron(COLOR_PAIR(state+1));
+    mvprintw(i, j, "%c", printable_chars[state]);
+    attroff(COLOR_PAIR(state+1));
+}
+
+int display_board(struct board_t *b) {
 
     // print chars one by one
     for (int i = 0; i < LINES && i-pos_y < BOARD_HEIGHT; i++) {
@@ -59,7 +66,7 @@ int display_board(struct board_t *b) {
             int pos = (i-pos_y) * BOARD_WIDTH + (j-pos_x);
             enum state_t value = b->front[pos];
 
-            mvprintw(i, j, "%c", printable_chars[value]);
+            print_character(i, j, value);
         }
     }
     refresh();
