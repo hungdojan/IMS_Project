@@ -61,20 +61,9 @@ void apply_rules(struct board_t *b) {
                         b->back[i * BOARD_WIDTH + j] = CELL_DEAD;
                         break;
                 }
-                // if (neighbors == 2 || neighbors == 3)
-                //     b->back[i * BOARD_WIDTH + j] = CELL_ALIVE;
-                // else
-                //     b->back[i * BOARD_WIDTH + j] = CELL_DEAD;
             } else if (b->front[i * BOARD_WIDTH + j] == CELL_ALIVE) {
                 b->back[i * BOARD_WIDTH + j] = CELL_ALIVE;
-            }
-            // } else {
-            //     // dead
-            //     if (neighbors == 3)
-            //         b->back[i * BOARD_WIDTH + j] = CELL_ALIVE;
-            //     else
-            //         b->back[i * BOARD_WIDTH + j] = CELL_DEAD;
-            // }
-    }
-}
+            } // if b->front[x] == CELL_DEAD
+        } // for (int j ...)
+    } // for (int i ...)
 }

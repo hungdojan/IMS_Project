@@ -1,6 +1,6 @@
 *.o
 *.zip
-ims_project
+ims_project*
 .ccls
 doc/
 .ccls-cache/

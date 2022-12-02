@@ -16,10 +16,14 @@
 
 #define BOARD_WIDTH   100
 #define BOARD_HEIGHT  100
-#define CELL_ALIVE 'x'
-#define CELL_DEAD  ' '
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
+
+enum state_t {
+    CELL_DEAD=0,
+    CELL_ALIVE,
+    STATE_LEN
+};
 
 /** Starting coordinates of the board */
 extern int pos_x;
