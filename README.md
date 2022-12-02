@@ -63,5 +63,9 @@ make pixel_edit
 | KEY_LEFT  | posun obrazovky doleva      |
 |   SPACE   | zastaveni/spusteni iterace  |
 |-----------+-----------------------------|
+
+Argumenty:
+    -i     Maximalni pocet iteraci
+    -n     Nutricni hodnota (pouziti v programu "imp_project2")
 ```
 

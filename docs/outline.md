@@ -14,7 +14,6 @@
 - Description of our approach: equations, transitional functions, theory
 - Description of implementation
 - Results
-
 ## Model properties
 ### canvas
   - size 50x50 (?)
@@ -59,6 +58,7 @@ https://www.sciencedirect.com/science/article/abs/pii/073497509390031H?fr=RR-2&r
   - Stages in an array. Exponential increase in probability of a cell becoming uninhabitable
   - From that a probability of cells dividing is inferred. 
   - Add a counter of cells that are alive, and a counter of generations.
+  - Higher nutritional argument should reflect close packed growth -> more aggressive division
 - **Completely new model**
   - high nutrients -> more compact growth
   - low nutrients -> less compact growth

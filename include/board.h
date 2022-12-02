@@ -14,9 +14,10 @@
 
 #include <ncurses.h>
 
-#define BOARD_WIDTH   100
-#define BOARD_HEIGHT  100
+#define BOARD_WIDTH   400
+#define BOARD_HEIGHT  200
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define RAND(limit) (rand() % limit)
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 
 #define DEFINE_COLOR(name_val, r, g, b) \
@@ -32,7 +33,8 @@
  */
 enum custom_color_t {
     CC_LIGHT_GRAY=30,
-    CC_ALMOST_BLACK
+    CC_ALMOST_BLACK,
+    CC_LIGHT_RED,
 };
 
 /**
@@ -43,9 +45,6 @@ enum state_t {
     CELL_DEAD=0,
     CELL_ALIVE,
     // model 2
-    CELL_AGE1,
-    CELL_AGE2,
-    CELL_AGE3,
     CELL_UNHABITED,
     // model 3
     CELL_UNOCCUPIED_N,
@@ -56,7 +55,11 @@ enum state_t {
     CELL_UNOCCUPIED_NE,
     CELL_UNOCCUPIED_W,
     CELL_UNOCCUPIED_SE,
-    STATE_LEN
+    CELL_DIFF_MYCEL,
+    CELL_CONIDIA,
+    STATE_LEN,
+    // dynamic model 2
+    CELL_AGE_START=50,
 };
 
 /** Starting coordinates of the board */
@@ -70,8 +73,11 @@ extern int iteration;
  * @brief Implementation of double buffering.
  */
 struct board_t {
-    char *front;    /**< Newest buffer; to be displayed */
-    char *back;     /**< Older buffer, to store updated board and swap with front */
+    int max_iter;       /**< Maximal number of iterations; -1 means no limit */
+    int nutrition_val;  /**< Number of steps before cell becomes unhabited (defaults 1) */
+    int alive_counter;  /**< Number of cells that are alive */
+    char *front;        /**< Newest buffer; to be displayed */
+    char *back;         /**< Older buffer, to store updated board and swap with front */
 };
 
 /**

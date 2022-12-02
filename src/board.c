@@ -26,6 +26,10 @@ int init_board(struct board_t *b) {
     b->front = calloc(BOARD_WIDTH * BOARD_HEIGHT, 1);
     if (b->front == NULL)   goto err_front;
 
+    b->alive_counter = 1;
+    b->nutrition_val = 3;
+    b->max_iter = -1;
+
     // init starting grid with dots
     memmove(b->front, INIT_POS, BOARD_WIDTH * BOARD_HEIGHT);
     return 0;
@@ -48,14 +52,15 @@ int update_board(struct board_t *b) {
 }
 
 static void print_character(int i, int j, enum state_t state) {
+    // TODO: for debugging purposes
     static char *printable_chars[] = {
         // model 1
         "  ",    // CELL_DEAD
         "[]",    // CELL_ALIVE
         // model 2
-        "  ",    // CELL_AGE1
-        "  ",    // CELL_AGE2
-        "  ",    // CELL_AGE3
+        "11",    // CELL_AGE1
+        "22",    // CELL_AGE2
+        "33",    // CELL_AGE3
         "  ",    // CELL_UNHABITED
         // model 3
         "  ",    // CELL_UNOCCUPIED_N,
@@ -66,9 +71,25 @@ static void print_character(int i, int j, enum state_t state) {
         "  ",    // CELL_UNOCCUPIED_NE,
         "  ",    // CELL_UNOCCUPIED_W,
         "  ",    // CELL_UNOCCUPIED_SE,
+
+        "11",    // CELL_AGE1
+        "22",    // CELL_AGE2
+        "33",    // CELL_AGE3
+        "44",    // CELL_AGE4
+        "55",    // CELL_AGE4
+        "66",    // CELL_AGE4
+        "77",    // CELL_AGE4
+        "88",    // CELL_AGE4
+        "99",    // CELL_AGE4
+        "00",    // CELL_AGE4
     };
     attron(COLOR_PAIR(state+1));
-    mvprintw(i, j*2, "%s", printable_chars[state]);
+    if (state == CELL_ALIVE || state == CELL_CONIDIA || state == CELL_DIFF_MYCEL) {
+        // mvprintw(i, j*2, "%s", printable_chars[state]);
+        mvprintw(i, j*2, "[]");
+    } else {
+        mvprintw(i, j*2, "  ");
+    }
     attroff(COLOR_PAIR(state+1));
 }
 

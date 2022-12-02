@@ -48,10 +48,10 @@ void apply_rules(struct board_t *b) {
                         b->back[i * BOARD_WIDTH + j] = (r < 125) ? CELL_ALIVE : CELL_DEAD;
                         break;
                     case 2:
-                        b->back[i * BOARD_WIDTH + j] = (r < 250) ? CELL_ALIVE : CELL_DEAD;
+                        // b->back[i * BOARD_WIDTH + j] = (r < 250) ? CELL_ALIVE : CELL_DEAD;
                         break;
                     case 3:
-                        b->back[i * BOARD_WIDTH + j] = (r < 500) ? CELL_ALIVE : CELL_DEAD;
+                        // b->back[i * BOARD_WIDTH + j] = (r < 500) ? CELL_ALIVE : CELL_DEAD;
                         break;
                     case 4:
                     case 5:
