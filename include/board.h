@@ -39,12 +39,23 @@ enum custom_color_t {
  * @brief List of cell states.
  */
 enum state_t {
+    // model 1
     CELL_DEAD=0,
     CELL_ALIVE,
+    // model 2
     CELL_AGE1,
     CELL_AGE2,
     CELL_AGE3,
     CELL_UNHABITED,
+    // model 3
+    CELL_UNOCCUPIED_N,
+    CELL_UNOCCUPIED_SW,
+    CELL_UNOCCUPIED_E,
+    CELL_UNOCCUPIED_NW,
+    CELL_UNOCCUPIED_S,
+    CELL_UNOCCUPIED_NE,
+    CELL_UNOCCUPIED_W,
+    CELL_UNOCCUPIED_SE,
     STATE_LEN
 };
 

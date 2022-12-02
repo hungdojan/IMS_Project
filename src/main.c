@@ -26,13 +26,24 @@ static void setup_colors() {
     DEFINE_COLOR(CC_ALMOST_BLACK, 10, 10, 10);
 
     // setup color pairs
-    // syntax:  COLOR_LABEL,    COLOR_FONT,  COLOR_BACKGROUND
-    init_pair(CELL_DEAD+1,      COLOR_WHITE, CC_ALMOST_BLACK);
-    init_pair(CELL_ALIVE+1,     COLOR_BLACK, COLOR_CYAN);
-    init_pair(CELL_AGE1+1,      COLOR_WHITE, CC_ALMOST_BLACK);
-    init_pair(CELL_AGE2+1,      COLOR_WHITE, CC_ALMOST_BLACK);
-    init_pair(CELL_AGE3+1,      COLOR_WHITE, CC_ALMOST_BLACK);
-    init_pair(CELL_UNHABITED+1, COLOR_BLACK, CC_LIGHT_GRAY);
+    // syntax:  COLOR_LABEL,        COLOR_FONT,  COLOR_BACKGROUND
+    init_pair(CELL_DEAD+1,          COLOR_WHITE, CC_ALMOST_BLACK);
+    init_pair(CELL_ALIVE+1,         COLOR_BLACK, COLOR_CYAN);
+    // model 2
+    init_pair(CELL_AGE1+1,          COLOR_WHITE, CC_ALMOST_BLACK);
+    init_pair(CELL_AGE2+1,          COLOR_WHITE, CC_ALMOST_BLACK);
+    init_pair(CELL_AGE3+1,          COLOR_WHITE, CC_ALMOST_BLACK);
+    init_pair(CELL_UNHABITED+1,     COLOR_BLACK, CC_LIGHT_GRAY);
+    // model 3
+    init_pair(CELL_UNOCCUPIED_N+1,  COLOR_WHITE, CC_ALMOST_BLACK);
+    init_pair(CELL_UNOCCUPIED_S+1,  COLOR_WHITE, CC_ALMOST_BLACK);
+    init_pair(CELL_UNOCCUPIED_E+1,  COLOR_WHITE, CC_ALMOST_BLACK);
+    init_pair(CELL_UNOCCUPIED_W+1,  COLOR_WHITE, CC_ALMOST_BLACK);
+    init_pair(CELL_UNOCCUPIED_NE+1, COLOR_WHITE, CC_ALMOST_BLACK);
+    init_pair(CELL_UNOCCUPIED_NW+1, COLOR_WHITE, CC_ALMOST_BLACK);
+    init_pair(CELL_UNOCCUPIED_SE+1, COLOR_WHITE, CC_ALMOST_BLACK);
+    init_pair(CELL_UNOCCUPIED_SW+1, COLOR_WHITE, CC_ALMOST_BLACK);
+    // model 4
 }
 
 /**
@@ -56,6 +67,7 @@ int main() {
     int timer = 0;          // current timer's value
     int timer_limit = 50;   // after timer hits this value, make an iteration
     time_t t1;
+    int max_x, max_y;
     srand((unsigned)time(&t1));
 
     struct board_t b = { NULL, NULL };
@@ -70,22 +82,35 @@ int main() {
 
     do {
         ch = getch();
+        getmaxyx(stdscr, max_y, max_x);
         switch (ch) {
             case KEY_UP:    // show what is above highest row
-                if (pos_y + 1 <= 0)
+                if (pos_y + 1 <= 0) {
                     pos_y++;
+                    if (!pause)
+                        display_board(&b);
+                }
                 break;
             case KEY_DOWN:  // show what is below lowest row
-                if (pos_y - 1 + BOARD_HEIGHT >= LINES - 2)
+                if (pos_y - 1 + BOARD_HEIGHT >= max_y - 2) {
                     pos_y--;
+                    if (!pause)
+                        display_board(&b);
+                }
                 break;
             case KEY_LEFT:  // show what is on the left
-                if (pos_x + 1 <= 0)
+                if (pos_x + 1 <= 0) {
                     pos_x++;
+                    if (!pause)
+                        display_board(&b);
+                }
                 break;
             case KEY_RIGHT: // show what is on the right
-                if (pos_x - 1 + BOARD_WIDTH >= COLS - 2)
+                if (pos_x - 1 + BOARD_WIDTH >= max_x - 2) {
                     pos_x--;
+                    if (!pause)
+                        display_board(&b);
+                }
                 break;
 
             case '+':   // increase speed
@@ -93,6 +118,13 @@ int main() {
                 break;
             case '-':   // decrease speed
                 timer_limit = MIN(100, timer_limit+5);
+                break;
+            case 'k':
+                if (pause) {
+                    update_board(&b);
+                    display_board(&b);
+                    timer = 0;
+                }
                 break;
 
             case ' ':   // pause/resume iteration
@@ -102,13 +134,6 @@ int main() {
                     timeout(5);
                 pause = !pause;
                 break;
-        }
-
-        // allow to move screen when paused
-        // no iteration is make when app is paused
-        if (pause) {
-            display_board(&b);
-            continue;
         }
 
         if (timer < timer_limit) {
@@ -127,7 +152,7 @@ int main() {
     destroy_board(&b);
     printf("Number of iteration: %d\n", iteration);
     return 0;
-// handel when board could not be created.
+// handle when board could not be created.
 err_board:
     return 1;
 }

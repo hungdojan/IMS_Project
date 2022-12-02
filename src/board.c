@@ -49,12 +49,23 @@ int update_board(struct board_t *b) {
 
 static void print_character(int i, int j, enum state_t state) {
     static char *printable_chars[] = {
+        // model 1
         "  ",    // CELL_DEAD
         "[]",    // CELL_ALIVE
+        // model 2
         "  ",    // CELL_AGE1
         "  ",    // CELL_AGE2
         "  ",    // CELL_AGE3
         "  ",    // CELL_UNHABITED
+        // model 3
+        "  ",    // CELL_UNOCCUPIED_N,
+        "  ",    // CELL_UNOCCUPIED_SW,
+        "  ",    // CELL_UNOCCUPIED_E,
+        "  ",    // CELL_UNOCCUPIED_NW,
+        "  ",    // CELL_UNOCCUPIED_S,
+        "  ",    // CELL_UNOCCUPIED_NE,
+        "  ",    // CELL_UNOCCUPIED_W,
+        "  ",    // CELL_UNOCCUPIED_SE,
     };
     attron(COLOR_PAIR(state+1));
     mvprintw(i, j*2, "%s", printable_chars[state]);
