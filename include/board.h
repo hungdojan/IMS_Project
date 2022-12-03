@@ -76,6 +76,7 @@ struct board_t {
     int max_iter;       /**< Maximal number of iterations; -1 means no limit */
     int nutrition_val;  /**< Number of steps before cell becomes unhabited (defaults 1) */
     int alive_counter;  /**< Number of cells that are alive */
+    int uninhabitable_counter;  /**< Number of cells that are uninhabitable */
     char *front;        /**< Newest buffer; to be displayed */
     char *back;         /**< Older buffer, to store updated board and swap with front */
 };

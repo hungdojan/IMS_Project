@@ -27,6 +27,7 @@ int init_board(struct board_t *b) {
     if (b->front == NULL)   goto err_front;
 
     b->alive_counter = 1;
+    b->uninhabitable_counter = 1;
     b->nutrition_val = 3;
     b->max_iter = -1;
 
