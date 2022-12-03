@@ -37,10 +37,10 @@
         - cell types: (unoccupied, grass, tree, tree seedling)
         - Dest je rovnomerne rozprostren
         - Strom pracuje s 24-okolim (2 bunky siroke moorovo okoli)
-        - Ty funkce zasrany tranzitivni jsou fakt darecek, nechapu je
+        - Ty funkce tranzitivni jsou fakt darecek, nechapu je
         - chances of death for trees, tree seedlings and grasses are defined by the value of dynamic stress minus a threshold value
         - Je potreba prijit na charakteristiku vstupu deste
-        - Je potreba vyresit tu zkurvenou tranzitivni fci
+        - Je potreba vyresit tu tranzitivni fci
     - Tree-grass coexistence in savannas revisited - insights from an     examination of assumptions and mechanisms invoked in existing models
     
         https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.1461-0248.2004.00596.x
