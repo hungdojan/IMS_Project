@@ -21,6 +21,9 @@
 #include <unistd.h>     // getopt
 #include "board.h"
 
+/**
+ * @brief Process program arguments.
+ */
 static void load_args(struct board_t *b, int argc, char * const argv[]) {
     int opt = 0, val = 0;
     while ((opt = getopt(argc, argv, "i:n:")) != -1) {

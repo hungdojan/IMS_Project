@@ -49,6 +49,7 @@ void apply_rules(struct board_t *b) {
             int pos = i * BOARD_WIDTH + j;
             int value = b->front[pos];
 
+            // UNOCCUPIED CELL
             if (value == CELL_DEAD ||
                 (value >= CELL_AGE_START && value < CELL_AGE_START + b->nutrition_val)) {
 

@@ -56,11 +56,10 @@ void apply_rules(struct board_t *b) {
             int pos = i * BOARD_WIDTH + j;
             int value = b->front[pos];
 
+            // UNOCCUPIED CELL
             if (value == CELL_DEAD ||
                 (value >= CELL_AGE_START && value < CELL_AGE_START + b->nutrition_val)) {
 
-                // alive
-                // int alive_neighbours = nof_neighbours(b, i, j, CELL_ALIVE);
                 int alive_neighbours = get_alive_neighbours(b, i, j);
                 switch (alive_neighbours) {
                     case 1:
@@ -164,8 +163,6 @@ void apply_rules(struct board_t *b) {
                         if (RAND(1000) < 125) {
                             if (b->front[pos] >= CELL_ALIVE && b->front[pos] < CELL_MATURE) {
                                 b->back[pos] = b->front[pos] + 1;
-                            // } else if (b->front[pos] == CELL_DIFF_MYCEL) {
-                            //     b->back[pos] = CELL_CONIDIA;
                             }
                         } // if (RAND(1000) ...)
                         continue;
@@ -187,36 +184,13 @@ void apply_rules(struct board_t *b) {
                 if (RAND(1000) < 125) {
                     // SUM ALIVE NEIGHBOURS
                     int total_neighbours = get_alive_neighbours(b, i, j);
-                    // int alive_neighbours = nof_neighbours(b, i, j, CELL_ALIVE);
-                    // int mycel_neighbours = nof_neighbours(b, i, j, CELL_DIFF_MYCEL);
-                    // int conidia_neighbours = nof_neighbours(b, i, j, CELL_CONIDIA);
-                    // int total_neighbours = alive_neighbours + mycel_neighbours + conidia_neighbours;
-
-                    // if ((total_neighbours > 2 && b->nutrition_val > 3 && b->nutrition_val <= 5) ||
-                    //         (total_neighbours > 4 && b->nutrition_val > 5)) {
                     if (total_neighbours > 2) {
                         b->back[pos] = b->front[pos] + 1;
                         continue;
                     }
                 } // if (RAND(1000) ...)
                 b->back[pos] = b->front[pos];
-            // } else if (value == CELL_DIFF_MYCEL) {
-            //     if (RAND(1000) < 125) {
-            //         int alive_neighbours = nof_neighbours(b, i, j, CELL_ALIVE);
-            //         int mycel_neighbours = nof_neighbours(b, i, j, CELL_DIFF_MYCEL);
-            //         int conidia_neighbours = nof_neighbours(b, i, j, CELL_CONIDIA);
-            //         int total_neighbours = alive_neighbours + mycel_neighbours + conidia_neighbours;
-
-            //         if ((total_neighbours > 2 && b->nutrition_val > 3 && b->nutrition_val <= 5)||
-            //                 (total_neighbours > 4 && b->nutrition_val > 5)) {
-            //             b->back[pos] = CELL_CONIDIA;
-            //             continue;
-            //         }
-            //     } // if (RAND(1000) ...)
-            //     b->back[pos] = b->front[pos];
-            // }
-                } else if (value == CELL_UNHABITED || value == CELL_MATURE) {
-                       // || value == CELL_CONIDIA || value == CELL_DIFF_MYCEL) {
+            } else if (value == CELL_UNHABITED || value == CELL_MATURE) {
                 b->back[pos] = b->front[pos];
             } // if (value == CELL_DEAD ...)
         } // for (int j = 0; ...)

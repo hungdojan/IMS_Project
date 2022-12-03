@@ -53,7 +53,6 @@ int update_board(struct board_t *b) {
 }
 
 static void print_character(int i, int j, enum state_t state) {
-    // TODO: for debugging purposes
     static char *printable_chars[] = {
         // model 1
         "**",    // CELL_ALIVE

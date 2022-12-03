@@ -35,18 +35,23 @@ pip install pygame
 ```
 
 ### Rozjetí programu
-K rozjetí programu je možno použít přiložený `Makefile`.
+K rozjetí programu je možno použít přiložený `Makefile`. Po přeložení všech tří
+programu si uživatel může manuálně vybrat, jakou simulaci zapnout.
 
 ```bash
 # preklad programu
 make
 
-# preklad a rozjeti programu
-make run
+# příklady rozjeti programu
+./ims_project1
+./ims_project2 -n4
+./ims_project3 -n6 -i200
 
 # spusteni pixel_editoru
 make pixel_edit
 ```
+
+**Doporučení**: Zmenšete si font v terminále, abyste viděli celou simulaci.
 
 ## Ovládání hlavního programu
 

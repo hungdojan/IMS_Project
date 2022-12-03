@@ -46,36 +46,33 @@ void apply_rules(struct board_t *b) {
     for (int i = 0; i < BOARD_HEIGHT; i++) {
         // column
         for (int j = 0; j < BOARD_WIDTH; j++) {
-            int neighbors = nof_neighbors(b, i, j);
+            int pos = i * BOARD_WIDTH + j;
+            int alive_neighbors = nof_neighbors(b, i, j);
 
-            if (b->front[i * BOARD_WIDTH + j] == CELL_DEAD) {
-
-                // time_t t1;
-                // srand((unsigned)time(&t1));
-                int r = rand() % 1000;
-                // alive
-                switch(neighbors) {
+            // UNOCCUPIED CELL
+            if (b->front[pos] == CELL_DEAD) {
+                switch(alive_neighbors) {
                     case 1:
-                        b->back[i * BOARD_WIDTH + j] = (r < 125) ? CELL_ALIVE : CELL_DEAD;
+                        b->back[pos] = (RAND(1000) < 125) ? CELL_ALIVE : b->front[pos];
                         if (b->back[i * BOARD_WIDTH + j] == CELL_ALIVE)
                             b->alive_counter++;
                         break;
                     case 2:
                         // b->back[i * BOARD_WIDTH + j] = (r < 250) ? CELL_ALIVE : CELL_DEAD;
-                        break;
+                        // break;
                     case 3:
                         // b->back[i * BOARD_WIDTH + j] = (r < 500) ? CELL_ALIVE : CELL_DEAD;
-                        break;
+                        // break;
                     case 4:
                     case 5:
                     case 6:
                     case 7:
                     case 8:
-                        b->back[i * BOARD_WIDTH + j] = CELL_DEAD;
+                        b->back[pos] = b->front[pos];
                         break;
                 }
-            } else if (b->front[i * BOARD_WIDTH + j] == CELL_ALIVE) {
-                b->back[i * BOARD_WIDTH + j] = CELL_ALIVE;
+            } else if (b->front[pos] == CELL_ALIVE) {
+                b->back[pos] = b->front[pos];
             } // if b->front[x] == CELL_DEAD
         } // for (int j ...)
     } // for (int i ...)
