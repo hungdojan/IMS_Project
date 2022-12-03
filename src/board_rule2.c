@@ -117,18 +117,15 @@ void apply_rules(struct board_t *b)
                     }
 
                     // NUTRIENT DEPLETION
-                    if (RAND(1000) < 750)
+                    if (b->front[pos] == CELL_DEAD)
                     {
-                        if (b->front[pos] == CELL_DEAD)
-                        {
-                            b->back[pos] = CELL_AGE_START;
-                        }
-                        else if (b->front[pos] >= CELL_AGE_START)
-                        {
-                            b->back[pos] = b->front[pos] + 1;
-                            if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
-                                b->back[pos] = CELL_UNHABITED;
-                        }
+                        b->back[pos] = CELL_AGE_START;
+                    }
+                    else if (b->front[pos] >= CELL_AGE_START)
+                    {
+                        b->back[pos] = b->front[pos] + 1;
+                        if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
+                            b->back[pos] = CELL_UNHABITED;
                     }
                     continue;
                 case 4:
@@ -144,18 +141,15 @@ void apply_rules(struct board_t *b)
                     }
 
                     // NUTRIENT DEPLETION
-                    if (RAND(1000) < 750)
+                    if (b->front[pos] == CELL_DEAD)
                     {
-                        if (b->front[pos] == CELL_DEAD)
-                        {
-                            b->back[pos] = CELL_AGE_START;
-                        }
-                        else if (b->front[pos] >= CELL_AGE_START)
-                        {
-                            b->back[pos] = b->front[pos] + 1;
-                            if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
-                                b->back[pos] = CELL_UNHABITED;
-                        }
+                        b->back[pos] = CELL_AGE_START;
+                    }
+                    else if (b->front[pos] >= CELL_AGE_START)
+                    {
+                        b->back[pos] = b->front[pos] + 1;
+                        if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
+                            b->back[pos] = CELL_UNHABITED;
                     }
                     continue;
                 case 5:
@@ -170,19 +164,16 @@ void apply_rules(struct board_t *b)
                         }
                     }
 
-                    // NUTRIENT DEPLETIO
-                    if (RAND(1000) < 750)
+                    // NUTRIENT DEPLETION
+                    if (b->front[pos] == CELL_DEAD)
                     {
-                        if (b->front[pos] == CELL_DEAD)
-                        {
-                            b->back[pos] = CELL_AGE_START;
-                        }
-                        else if (b->front[pos] >= CELL_AGE_START)
-                        {
-                            b->back[pos] = b->front[pos] + 1;
-                            if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
-                                b->back[pos] = CELL_UNHABITED;
-                        }
+                        b->back[pos] = CELL_AGE_START;
+                    }
+                    else if (b->front[pos] >= CELL_AGE_START)
+                    {
+                        b->back[pos] = b->front[pos] + 1;
+                        if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
+                            b->back[pos] = CELL_UNHABITED;
                     }
                     continue;
                 case 6:
@@ -201,44 +192,7 @@ void apply_rules(struct board_t *b)
                     }
                     continue;
                 }
-                // ACTIVE CELL AGING
             }
-            // else if (value == CELL_ALIVE)
-            // {
-            //     if (RAND(1000) < 20)
-            //     {
-            //         int alive_neighbours = nof_neighbors(b, i, j, CELL_ALIVE);
-            //         int mycel_neighbours = nof_neighbors(b, i, j, CELL_DIFF_MYCEL);
-            //         int conidia_neighbours = nof_neighbors(b, i, j, CELL_CONIDIA);
-            //         int total_neighbours = alive_neighbours + mycel_neighbours + conidia_neighbours;
-
-            //         if ((total_neighbours > 2 && b->nutrition_val > 3 && b->nutrition_val <= 5)||
-            //             (total_neighbours > 4 && b->nutrition_val > 5))
-            //         {
-            //             b->back[pos] = CELL_DIFF_MYCEL;
-            //             continue;
-            //         }
-            //     }
-            //     b->back[pos] = b->front[pos];
-            // }
-            // else if (value == CELL_DIFF_MYCEL)
-            // {
-            //     if (RAND(1000) < 20)
-            //     {
-            //         int alive_neighbours = nof_neighbors(b, i, j, CELL_ALIVE);
-            //         int mycel_neighbours = nof_neighbors(b, i, j, CELL_DIFF_MYCEL);
-            //         int conidia_neighbours = nof_neighbors(b, i, j, CELL_CONIDIA);
-            //         int total_neighbours = alive_neighbours + mycel_neighbours + conidia_neighbours;
-
-            //         if ((total_neighbours > 2 && b->nutrition_val > 3 && b->nutrition_val <= 5)||
-            //             (total_neighbours > 4 && b->nutrition_val > 5))
-            //         {
-            //             b->back[pos] = CELL_CONIDIA;
-            //             continue;
-            //         }
-            //     }
-            //     b->back[pos] = b->front[pos];
-            // }
             else if (value == CELL_UNHABITED || value == CELL_ALIVE || value == CELL_CONIDIA || value == CELL_DIFF_MYCEL)
             {
                 b->back[pos] = b->front[pos];
