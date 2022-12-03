@@ -14,7 +14,6 @@
     #define _POSIX_C_SOURCE 2
 #endif
 
-#include <locale.h>     // setlocale
 #include <ncurses.h>
 #include <stdio.h>      // printf
 #include <stdlib.h>     // srand
@@ -58,23 +57,12 @@ static void setup_colors(struct board_t *b) {
     init_pair(CELL_UNHABITED+1,     COLOR_BLACK, CC_ALMOST_BLACK);
     init_pair(CELL_DIFF_MYCEL+1,    COLOR_BLACK, COLOR_YELLOW);
     init_pair(CELL_CONIDIA+1,       COLOR_BLACK, CC_LIGHT_RED);
-    // model 3
-    init_pair(CELL_UNOCCUPIED_N+1,  COLOR_WHITE, CC_ALMOST_BLACK);
-    init_pair(CELL_UNOCCUPIED_S+1,  COLOR_WHITE, CC_ALMOST_BLACK);
-    init_pair(CELL_UNOCCUPIED_E+1,  COLOR_WHITE, CC_ALMOST_BLACK);
-    init_pair(CELL_UNOCCUPIED_W+1,  COLOR_WHITE, CC_ALMOST_BLACK);
-    init_pair(CELL_UNOCCUPIED_NE+1, COLOR_WHITE, CC_ALMOST_BLACK);
-    init_pair(CELL_UNOCCUPIED_NW+1, COLOR_WHITE, CC_ALMOST_BLACK);
-    init_pair(CELL_UNOCCUPIED_SE+1, COLOR_WHITE, CC_ALMOST_BLACK);
-    init_pair(CELL_UNOCCUPIED_SW+1, COLOR_WHITE, CC_ALMOST_BLACK);
-    // model 4
 }
 
 /**
  * @brief Initial ncurses setup.
  */
 static void init_setup(struct board_t *b) {
-    setlocale(LC_ALL, "");      // enables Unicode support
     cbreak();                   // disable line buffering
     noecho();                   // user typed characters are not echoed
     keypad(stdscr, TRUE);       // support F1-F12 keys
@@ -182,7 +170,7 @@ int main(int argc, char * const *argv) {
     printf("Number of iterations: %d\n"
            "Number of cells alive: %d\n"
            "Number of cells uninhabitable: %d\n"
-           "Alive to uninhabitable ratio: %.4f\n", iteration, b.alive_counter, 
+           "Alive to uninhabitable ratio: %.4f\n", iteration, b.alive_counter,
                 b.uninhabitable_counter, b.alive_counter/(b.uninhabitable_counter*1.0));
     return 0;
 // handle when board could not be created.

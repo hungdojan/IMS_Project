@@ -46,15 +46,6 @@ enum state_t {
     CELL_ALIVE,
     // model 2
     CELL_UNHABITED,
-    // model 3
-    CELL_UNOCCUPIED_N,
-    CELL_UNOCCUPIED_SW,
-    CELL_UNOCCUPIED_E,
-    CELL_UNOCCUPIED_NW,
-    CELL_UNOCCUPIED_S,
-    CELL_UNOCCUPIED_NE,
-    CELL_UNOCCUPIED_W,
-    CELL_UNOCCUPIED_SE,
     CELL_DIFF_MYCEL,
     CELL_CONIDIA,
     STATE_LEN,
@@ -73,12 +64,12 @@ extern int iteration;
  * @brief Implementation of double buffering.
  */
 struct board_t {
-    int max_iter;       /**< Maximal number of iterations; -1 means no limit */
-    int nutrition_val;  /**< Number of steps before cell becomes unhabited (defaults 1) */
-    int alive_counter;  /**< Number of cells that are alive */
+    int max_iter;               /**< Maximal number of iterations; -1 means no limit */
+    int nutrition_val;          /**< Number of steps before cell becomes unhabited (defaults 1) */
+    int alive_counter;          /**< Number of cells that are alive */
     int uninhabitable_counter;  /**< Number of cells that are uninhabitable */
-    char *front;        /**< Newest buffer; to be displayed */
-    char *back;         /**< Older buffer, to store updated board and swap with front */
+    char *front;                /**< Newest buffer; to be displayed */
+    char *back;                 /**< Older buffer, to store updated board and swap with front */
 };
 
 /**

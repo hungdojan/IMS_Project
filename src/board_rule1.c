@@ -1,3 +1,14 @@
+/**
+ * @brief Module defining rules for Model 1.
+ *
+ * This source code serves as submission for
+ * a project of class IMS at FIT, BUT 2022/23.
+ *
+ * @file board_rule1.c
+ * @authors Hung Do (xdohun00)
+ *          Marek Dohnal (xdohna48)
+ * @date 05/12/2022
+ */
 #include "board.h"
 #include <stdlib.h>
 #include <time.h>
@@ -46,6 +57,8 @@ void apply_rules(struct board_t *b) {
                 switch(neighbors) {
                     case 1:
                         b->back[i * BOARD_WIDTH + j] = (r < 125) ? CELL_ALIVE : CELL_DEAD;
+                        if (b->back[i * BOARD_WIDTH + j] == CELL_ALIVE)
+                            b->alive_counter++;
                         break;
                     case 2:
                         // b->back[i * BOARD_WIDTH + j] = (r < 250) ? CELL_ALIVE : CELL_DEAD;
@@ -67,3 +80,5 @@ void apply_rules(struct board_t *b) {
         } // for (int j ...)
     } // for (int i ...)
 }
+
+/* board_rule1.c */

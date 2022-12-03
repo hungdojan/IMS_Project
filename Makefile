@@ -1,7 +1,7 @@
 # C project: ims_project
 CC=gcc
 CFLAGS=-std=c99 -Wall -Wextra -pedantic -Iinclude
-LDLIBS=-lncursesw
+LDLIBS=-lncurses
 CFLAGS+=-O2 # Release
 # CFLAGS+=-g  # Debug
 TARGETS=ims_project1 ims_project2 ims_project3
@@ -21,7 +21,7 @@ ims_project1: $(OBJS)
 ims_project2: $(OBJS)
 	$(CC) $(CFLAGS) -o $@ ./src/main.o ./src/board.o ./src/board_setup.o ./src/board_rule2.o $(LDLIBS);
 ims_project3: $(OBJS)
-	$(CC) $(CFLAGS) -o $@ ./src/main.o ./src/board.o ./src/board_setup.o ./src/board_rule3.o $(LDLIBS);
+	$(CC) $(CFLAGS) -o $@ ./src/main.o ./src/board.o ./src/board_setup.o ./src/board_rule2_with_diff.o $(LDLIBS);
 
 src/%.o: src/%.c
 
