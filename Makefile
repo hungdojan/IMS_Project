@@ -21,7 +21,7 @@ ims_project1: $(OBJS)
 ims_project2: $(OBJS)
 	$(CC) $(CFLAGS) -o $@ ./src/main.o ./src/board.o ./src/board_setup.o ./src/board_rule2.o $(LDLIBS);
 ims_project3: $(OBJS)
-	$(CC) $(CFLAGS) -o $@ ./src/main.o ./src/board.o ./src/board_setup.o ./src/board_rule2_with_diff.o $(LDLIBS);
+	$(CC) $(CFLAGS) -o $@ ./src/main.o ./src/board.o ./src/board_setup.o ./src/board_rule_aging.o $(LDLIBS);
 
 src/%.o: src/%.c
 

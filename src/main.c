@@ -116,29 +116,37 @@ int main(int argc, char * const *argv) {
             case KEY_UP:    // show what is above highest row
                 if (pos_y + 1 <= 0) {
                     pos_y++;
-                    if (!pause)
+                    if (!pause) {
                         display_board(&b);
+                        continue;
+                    }
                 }
                 break;
             case KEY_DOWN:  // show what is below lowest row
                 if (pos_y - 1 + BOARD_HEIGHT >= max_y - 2) {
                     pos_y--;
-                    if (!pause)
+                    if (!pause) {
                         display_board(&b);
+                        continue;
+                    }
                 }
                 break;
             case KEY_LEFT:  // show what is on the left
                 if (pos_x + 1 <= 0) {
                     pos_x++;
-                    if (!pause)
+                    if (!pause) {
                         display_board(&b);
+                        continue;
+                    }
                 }
                 break;
             case KEY_RIGHT: // show what is on the right
                 if (pos_x - 1 + BOARD_WIDTH >= max_x - 2) {
                     pos_x--;
-                    if (!pause)
+                    if (!pause) {
                         display_board(&b);
+                        continue;
+                    }
                 }
                 break;
 
@@ -154,7 +162,7 @@ int main(int argc, char * const *argv) {
                     display_board(&b);
                     timer = 0;
                 }
-                break;
+                continue;
 
             case ' ':   // pause/resume iteration
                 if (!pause)
@@ -162,6 +170,8 @@ int main(int argc, char * const *argv) {
                 else
                     timeout(5);
                 pause = !pause;
+                break;
+            default:
                 break;
         }
 
