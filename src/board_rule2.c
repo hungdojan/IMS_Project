@@ -73,7 +73,10 @@ void apply_rules(struct board_t *b)
                         {
                             b->back[pos] = b->front[pos] + 1;
                             if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
+                            {
                                 b->back[pos] = CELL_UNHABITED;
+                                b->uninhabitable_counter++;
+                            }
                         }
                     }
                     continue;
@@ -100,7 +103,10 @@ void apply_rules(struct board_t *b)
                         {
                             b->back[pos] = b->front[pos] + 1;
                             if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
+                            {
                                 b->back[pos] = CELL_UNHABITED;
+                                b->uninhabitable_counter++;
+                            }
                         }
                     }
                     continue;
@@ -125,7 +131,10 @@ void apply_rules(struct board_t *b)
                     {
                         b->back[pos] = b->front[pos] + 1;
                         if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
+                        {
                             b->back[pos] = CELL_UNHABITED;
+                            b->uninhabitable_counter++;
+                        }
                     }
                     continue;
                 case 4:
@@ -149,7 +158,10 @@ void apply_rules(struct board_t *b)
                     {
                         b->back[pos] = b->front[pos] + 1;
                         if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
+                        {
                             b->back[pos] = CELL_UNHABITED;
+                            b->uninhabitable_counter++;
+                        }
                     }
                     continue;
                 case 5:
@@ -173,7 +185,10 @@ void apply_rules(struct board_t *b)
                     {
                         b->back[pos] = b->front[pos] + 1;
                         if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
+                        {
                             b->back[pos] = CELL_UNHABITED;
+                            b->uninhabitable_counter++;
+                        }
                     }
                     continue;
                 case 6:
@@ -188,7 +203,10 @@ void apply_rules(struct board_t *b)
                     {
                         b->back[pos] = b->front[pos] + 1;
                         if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
+                        {
                             b->back[pos] = CELL_UNHABITED;
+                            b->uninhabitable_counter++;
+                        }
                     }
                     continue;
                 }

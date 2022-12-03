@@ -94,7 +94,7 @@ int main(int argc, char * const *argv) {
     int max_x, max_y;
     srand((unsigned)time(&t1));
 
-    struct board_t b = { 0, 0, 0, NULL, NULL };
+    struct board_t b = { 0, 0, 0, 1, NULL, NULL };
     if (init_board(&b))
         goto err_board;
 
@@ -181,7 +181,9 @@ int main(int argc, char * const *argv) {
     destroy_board(&b);
     printf("Number of iterations: %d\n"
            "Number of cells alive: %d\n"
-           "Alive to total ratio: %.4f\n", iteration, b.alive_counter, b.alive_counter*1.0/(BOARD_HEIGHT*BOARD_WIDTH));
+           "Number of cells uninhabitable: %d\n"
+           "Alive to uninhabitable ratio: %.4f\n", iteration, b.alive_counter, 
+                b.uninhabitable_counter, b.alive_counter/(b.uninhabitable_counter*1.0));
     return 0;
 // handle when board could not be created.
 err_board:
