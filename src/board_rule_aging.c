@@ -154,7 +154,7 @@ void apply_rules(struct board_t *b) {
                         continue;
                     case 5:
                         // OCCUPATION
-                        if (b->nutrition_val > 7) {
+                        if (b->nutrition_val > 6) {
                             b->back[pos] = (RAND(1000) < 500) ? CELL_ALIVE : b->front[pos];
                             if (b->back[pos] == CELL_ALIVE) {
                                 b->alive_counter++;
