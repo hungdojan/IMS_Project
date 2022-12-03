@@ -34,7 +34,9 @@
 enum custom_color_t {
     CC_LIGHT_GRAY=30,
     CC_ALMOST_BLACK,
-    CC_LIGHT_RED,
+    CC_YELLOW,
+    CC_ORANGE,
+    CC_RED,
 };
 
 /**
@@ -45,10 +47,21 @@ enum state_t {
     CELL_DEAD=0,
     CELL_ALIVE,
     // model 2
+    CELL_ALIVE_AGE2,
+    CELL_ALIVE_AGE3,
+    CELL_ALIVE_AGE4,
+    CELL_DIFF_AGE1,
+    CELL_DIFF_AGE2,
+    CELL_DIFF_AGE3,
+    CELL_DIFF_AGE4,
+    CELL_CONIDIA_AGE1,
+    CELL_CONIDIA_AGE2,
+    CELL_CONIDIA_AGE3,
+    CELL_CONIDIA_AGE4,
+    CELL_MATURE,
     CELL_UNHABITED,
-    CELL_DIFF_MYCEL,
-    CELL_CONIDIA,
     STATE_LEN,
+
     // dynamic model 2
     CELL_AGE_START=50,
 };

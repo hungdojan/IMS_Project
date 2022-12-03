@@ -43,20 +43,33 @@ static void setup_colors(struct board_t *b) {
     // defining new colors
     // list of custom colors are listed in enum custom_color_t
     DEFINE_COLOR(CC_LIGHT_GRAY, 225, 225, 225);
-    DEFINE_COLOR(CC_LIGHT_RED, 200, 0, 0);
+    DEFINE_COLOR(CC_RED, 246, 65, 45);
+    DEFINE_COLOR(CC_ORANGE, 255, 152, 0);
+    DEFINE_COLOR(CC_YELLOW, 255, 236, 25);
     DEFINE_COLOR(CC_ALMOST_BLACK, 10, 10, 10);
 
     // setup color pairs
     // syntax:  COLOR_LABEL,        COLOR_FONT,  COLOR_BACKGROUND
     init_pair(CELL_DEAD+1,          COLOR_WHITE, CC_ALMOST_BLACK);
     init_pair(CELL_ALIVE+1,         COLOR_BLACK, COLOR_CYAN);
+    init_pair(CELL_ALIVE_AGE2+1,    COLOR_BLACK, COLOR_CYAN);
+    init_pair(CELL_ALIVE_AGE3+1,    COLOR_BLACK, COLOR_CYAN);
+    init_pair(CELL_ALIVE_AGE4+1,    COLOR_BLACK, COLOR_CYAN);
+    init_pair(CELL_DIFF_AGE1+1,     COLOR_BLACK, CC_YELLOW);
+    init_pair(CELL_DIFF_AGE2+1,     COLOR_BLACK, CC_YELLOW);
+    init_pair(CELL_DIFF_AGE3+1,     COLOR_BLACK, CC_YELLOW);
+    init_pair(CELL_DIFF_AGE4+1,     COLOR_BLACK, CC_YELLOW);
+    init_pair(CELL_CONIDIA_AGE1+1,  COLOR_BLACK, CC_ORANGE);
+    init_pair(CELL_CONIDIA_AGE2+1,  COLOR_BLACK, CC_ORANGE);
+    init_pair(CELL_CONIDIA_AGE3+1,  COLOR_BLACK, CC_ORANGE);
+    init_pair(CELL_CONIDIA_AGE4+1,  COLOR_BLACK, CC_ORANGE);
+    init_pair(CELL_MATURE+1,        COLOR_BLACK, CC_RED);
+    init_pair(CELL_UNHABITED+1,     COLOR_BLACK, CC_ALMOST_BLACK);
+
     // dynamic setup
     for (int i = 0; i < b->nutrition_val; i++) {
         init_pair(CELL_AGE_START + i+1, COLOR_WHITE, CC_ALMOST_BLACK);
     }
-    init_pair(CELL_UNHABITED+1,     COLOR_BLACK, CC_ALMOST_BLACK);
-    init_pair(CELL_DIFF_MYCEL+1,    COLOR_BLACK, COLOR_YELLOW);
-    init_pair(CELL_CONIDIA+1,       COLOR_BLACK, CC_LIGHT_RED);
 }
 
 /**
@@ -68,9 +81,12 @@ static void init_setup(struct board_t *b) {
     keypad(stdscr, TRUE);       // support F1-F12 keys
     timeout(5);                 // non-blocking reading
     curs_set(0);                // hide cursor
-    start_color();
 
-    setup_colors(b);
+    // setup colors if
+    if (has_colors() == TRUE) {
+        start_color();
+        setup_colors(b);
+    }
 }
 
 int main(int argc, char * const *argv) {

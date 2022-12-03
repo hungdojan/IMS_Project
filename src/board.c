@@ -56,42 +56,27 @@ static void print_character(int i, int j, enum state_t state) {
     // TODO: for debugging purposes
     static char *printable_chars[] = {
         // model 1
-        "  ",    // CELL_DEAD
-        "[]",    // CELL_ALIVE
-        // model 2
-        "11",    // CELL_AGE1
-        "22",    // CELL_AGE2
-        "33",    // CELL_AGE3
-        "  ",    // CELL_UNHABITED
-        // model 3
-        "  ",    // CELL_UNOCCUPIED_N,
-        "  ",    // CELL_UNOCCUPIED_SW,
-        "  ",    // CELL_UNOCCUPIED_E,
-        "  ",    // CELL_UNOCCUPIED_NW,
-        "  ",    // CELL_UNOCCUPIED_S,
-        "  ",    // CELL_UNOCCUPIED_NE,
-        "  ",    // CELL_UNOCCUPIED_W,
-        "  ",    // CELL_UNOCCUPIED_SE,
-
-        "11",    // CELL_AGE1
-        "22",    // CELL_AGE2
-        "33",    // CELL_AGE3
-        "44",    // CELL_AGE4
-        "55",    // CELL_AGE4
-        "66",    // CELL_AGE4
-        "77",    // CELL_AGE4
-        "88",    // CELL_AGE4
-        "99",    // CELL_AGE4
-        "00",    // CELL_AGE4
+        "**",    // CELL_ALIVE
+        "**",    // CELL_ALIVE_AGE2
+        "**",    // CELL_ALIVE_AGE3
+        "**",    // CELL_ALIVE_AGE4
+        "##",    // CELL_DIFF_AGE1
+        "##",    // CELL_DIFF_AGE2
+        "##",    // CELL_DIFF_AGE3
+        "##",    // CELL_DIFF_AGE4
+        "%%",    // CELL_CONIDIA_AGE1
+        "%%",    // CELL_CONIDIA_AGE2
+        "%%",    // CELL_CONIDIA_AGE3
+        "%%",    // CELL_CONIDIA_AGE4
+        "@@",    // CELL_PRODUCTIVE
     };
-    attron(COLOR_PAIR(state+1));
-    if (state == CELL_ALIVE || state == CELL_CONIDIA || state == CELL_DIFF_MYCEL) {
-        // mvprintw(i, j*2, "%s", printable_chars[state]);
-        mvprintw(i, j*2, "[]");
-    } else {
+    if (has_colors() == TRUE) {
+        attron(COLOR_PAIR(state+1));
         mvprintw(i, j*2, "  ");
+        attroff(COLOR_PAIR(state+1));
+    } else {
+        mvprintw(i, j*2, "%s", printable_chars[state]);
     }
-    attroff(COLOR_PAIR(state+1));
 }
 
 int display_board(struct board_t *b) {

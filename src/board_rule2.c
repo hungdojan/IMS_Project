@@ -177,8 +177,7 @@ void apply_rules(struct board_t *b) {
                         } // if (b->front[pos] ...)
                         continue;
                 } // switch (alive_neighbors)
-            } else if (value == CELL_UNHABITED || value == CELL_ALIVE ||
-                    value == CELL_CONIDIA || value == CELL_DIFF_MYCEL) {
+            } else if (value == CELL_UNHABITED || value == CELL_ALIVE) {
                 b->back[pos] = b->front[pos];
             }
         } // for (int j = 0; ...)
