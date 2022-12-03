@@ -39,5 +39,5 @@ debug: $(TARGET)
 
 pack:
 	rm -f 11_xdohna48_xdohun00.zip
-	zip -r 11_xdohna48_xdohun00 Makefile ./src/*.c ./include/*.h docs/* README.md
+	zip -r 11_xdohna48_xdohun00 Makefile ./src/*.c ./include/*.h docs/src/main.tex docs/src/biblio.bib studie.pdf README.md
 
