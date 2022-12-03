@@ -77,7 +77,10 @@ void apply_rules(struct board_t *b) {
                             } else if (b->front[pos] >= CELL_AGE_START) {
                                 b->back[pos] = b->front[pos] + 1;
                                 if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
+                                {    
                                     b->back[pos] = CELL_UNHABITED;
+                                    b->uninhabitable_counter++;
+                                }
                             }
                         } // if (RAND(1000) ...)
                         continue;
@@ -98,7 +101,10 @@ void apply_rules(struct board_t *b) {
                             } else if (b->front[pos] >= CELL_AGE_START) {
                                 b->back[pos] = b->front[pos] + 1;
                                 if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
+                                {
                                     b->back[pos] = CELL_UNHABITED;
+                                    b->uninhabitable_counter++;
+                                }
                             }
                         } // if (RAND(1000) ...)
                         continue;
@@ -117,8 +123,11 @@ void apply_rules(struct board_t *b) {
                             b->back[pos] = CELL_AGE_START;
                         } else if (b->front[pos] >= CELL_AGE_START) {
                             b->back[pos] = b->front[pos] + 1;
-                            if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
+                            if (b->back[pos] - CELL_AGE_START >= b->nutrition_val) 
+                            {
                                 b->back[pos] = CELL_UNHABITED;
+                                b->uninhabitable_counter++;
+                            }
                         } // if (b->front[pos] ...)
                         continue;
                     case 4:
@@ -137,7 +146,10 @@ void apply_rules(struct board_t *b) {
                         } else if (b->front[pos] >= CELL_AGE_START) {
                             b->back[pos] = b->front[pos] + 1;
                             if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
+                            {
                                 b->back[pos] = CELL_UNHABITED;
+                                b->uninhabitable_counter++;
+                            }
                         } // if (b->front[pos] ...)
                         continue;
                     case 5:
@@ -156,7 +168,10 @@ void apply_rules(struct board_t *b) {
                         } else if (b->front[pos] >= CELL_AGE_START) {
                             b->back[pos] = b->front[pos] + 1;
                             if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
+                            {
                                 b->back[pos] = CELL_UNHABITED;
+                                b->uninhabitable_counter++;
+                            }
                         } // if (b->nutrition_val ...)
 
                         // ACTIVE CELL AGING
@@ -175,7 +190,10 @@ void apply_rules(struct board_t *b) {
                         } else if (b->front[pos] >= CELL_AGE_START) {
                             b->back[pos] = b->front[pos] + 1;
                             if (b->back[pos] - CELL_AGE_START >= b->nutrition_val)
+                            {
                                 b->back[pos] = CELL_UNHABITED;
+                                b->uninhabitable_counter++;
+                            }
                         } // if (b->front[pos] ...)
                         continue;
                 } // switch (alive_neighbours)
