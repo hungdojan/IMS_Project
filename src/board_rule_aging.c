@@ -173,13 +173,6 @@ void apply_rules(struct board_t *b) {
                                 b->uninhabitable_counter++;
                             }
                         } // if (b->nutrition_val ...)
-
-                        // ACTIVE CELL AGING
-                        if (RAND(1000) < 125) {
-                            if (b->front[pos] >= CELL_ALIVE && b->front[pos] < CELL_MATURE) {
-                                b->back[pos] = b->front[pos] + 1;
-                            }
-                        } // if (RAND(1000) ...)
                         continue;
                     case 6:
                     case 7:
