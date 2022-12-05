@@ -13,6 +13,9 @@ OBJS=$(patsubst %.c,%.o,$(wildcard ./src/*.c))
 
 all: $(TARGETS)
 
+run: $(TARGETS)
+	./ims_project3 -i150 -n4
+
 doc: Doxyfile
 	doxygen
 
